@@ -7,30 +7,59 @@ public class GroundEnemy : Enemy
     [SerializeField] GameObject poisonLight, freezeLight, fireLight;
     [SerializeField] Animator animator;
 
-    
 
+
+    // private void ManageStateMachine()
+    // {
+    //     switch()
+    // }
+
+
+
+
+
+    private void GetHit(int amount)
+    {
+        getStats.Hp -= amount;
+        if (getStats.Hp <= 0)
+        {
+            animator.SetTrigger("Die");
+            StartCoroutine(WaitAndDie());
+        }
+        else
+            animator.SetTrigger("Take Damage");
+    }
+
+    private IEnumerator WaitAndDie()
+    {
+        yield return new WaitForSeconds(3f);
+       
+        Destroy(gameObject);
+    }
 
     #region  STATUS_EFFECTS
     public override void Start()
     {
+        animator = GetComponent<Animator>();
         base.Start();
     }
     public override void OnBurnedRecieve()
     {
         base.OnBurnedRecieve();
         TriggerFireLight();
-
+        GetHit(20);
     }
     public override void OnPoisonRecieve()
     {
         base.OnPoisonRecieve();
         TriggerPoisonLight();
-
+        GetHit(40);
     }
     public override void OnFreezedRecieve()
     {
         base.OnFreezedRecieve();
         TriggerFreezeLight();
+        GetHit(5);
 
     }
 
@@ -61,7 +90,7 @@ public class GroundEnemy : Enemy
     }
 
     IEnumerator WaitToDeactivate(GameObject light)
-    {   
+    {
         yield return new WaitForSeconds(2f);
         light.SetActive(false);
     }
