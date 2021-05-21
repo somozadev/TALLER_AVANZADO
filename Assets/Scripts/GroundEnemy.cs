@@ -8,16 +8,6 @@ public class GroundEnemy : Enemy
     [SerializeField] Animator animator;
 
 
-
-    // private void ManageStateMachine()
-    // {
-    //     switch()
-    // }
-
-
-
-
-
     private void GetHit(int amount)
     {
         getStats.Hp -= amount;
@@ -43,6 +33,7 @@ public class GroundEnemy : Enemy
         animator = GetComponent<Animator>();
         base.Start();
     }
+    
     public override void OnBurnedRecieve()
     {
         base.OnBurnedRecieve();

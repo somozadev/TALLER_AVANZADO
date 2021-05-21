@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
 
     public virtual void Start()
     {   stats = new EnemyStats(100, 100, 10, 5, StatusState.NORMAL,ENEMY_STATE_MACHINE.IDLE);
+    
         GameManager.Instance.player.playerAbilities.onPoisonGlobal += OnPoisonRecieve;
         GameManager.Instance.player.playerAbilities.onFreezedGlobal += OnFreezedRecieve;
         GameManager.Instance.player.playerAbilities.onBurnedGlobal += OnBurnedRecieve;

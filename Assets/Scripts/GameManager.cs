@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
     #endregion
+    public AudioManager audioManager;
     public Player player;
 
 }

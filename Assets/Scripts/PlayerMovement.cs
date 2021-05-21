@@ -6,8 +6,8 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private PlayerInput playerInput;
-    [SerializeField] private Vector2 rawInput;
-    [SerializeField] private Vector3 dir;
+    private Vector2 rawInput;
+    private Vector3 dir;
     [SerializeField] private bool isMoving;
     [SerializeField] public float speed;
     public Rigidbody rb;
@@ -44,9 +44,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move(Vector2 input)
     {
+        transform.forward = rb.velocity;
         if (input.magnitude >= 0.2f)
         {
-            rb.AddForce(dir * Time.deltaTime * speed);
+            rb.velocity = new Vector3(dir.x * speed, rb.velocity.y, dir.z * speed);
         }
     }
 
